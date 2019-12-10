@@ -1,0 +1,30 @@
+<?xml version='1.0'?>
+
+<cache-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.oracle.com/coherence/coherence-cache-config"
+	xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-cache-config
+   coherence-cache-config.xsd">
+
+	<caching-schemes>
+
+
+		<proxy-scheme>
+			<service-name>TCPRemoteService</service-name>
+			<acceptor-config>
+				<tcp-acceptor>
+					<local-address>
+						<address system-property="coherence.extend.address"></address>
+						<port system-property="coherence.extend.port"></port>
+					</local-address>
+				</tcp-acceptor>								
+				<serializer>pof</serializer>
+			</acceptor-config>
+			<load-balancer>client</load-balancer>
+			<autostart system-property="extend.proxy.enabled.proxy_load-balancer">false</autostart><!-- true only for proxy nodes in proxy mode -->
+		</proxy-scheme>
+
+
+	</caching-schemes>
+
+
+</cache-config>

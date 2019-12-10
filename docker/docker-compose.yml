@@ -1,0 +1,91 @@
+version: "3.2"
+services:
+  coh_wka1:
+    image: telus/coh_domain_poc:1.0
+    volumes:
+      - /coherence-archive:/tmp/coherence-archive
+    networks:
+      - coh_net
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+    environment:
+      COH_OPTS: "-Dcoherence.wka=tasks.coh_wka1"
+  coh_wka2:
+    image: telus/coh_domain_poc:1.0
+    depends_on:
+      - coh_wka1
+    volumes:
+      - /coherence-archive:/tmp/coherence-archive
+    networks:
+      - coh_net
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+    environment:
+      COH_OPTS: "-Dcoherence.wka=tasks.coh_wka1"
+  coh_storage:
+    image: telus/coh_domain_poc:1.0
+    depends_on:
+      - coh_wka1
+      - coh_wka2
+    volumes:
+      - /coherence-archive:/tmp/coherence-archive
+    networks:
+      - coh_net
+    deploy:
+      replicas: 2
+      placement:
+        constraints:
+          - node.role == worker
+    environment:
+      COH_OPTS: "-Dcoherence.wka=tasks.coh_wka1 -Dcoherence.wka2=tasks.coh_wka2"
+  coh_proxy:
+    image: telus/coh_domain_poc:1.0
+    depends_on:
+      - coh_wka1
+      - coh_wka2
+    ports:
+      - target: 8282
+        published: 8282
+        protocol: tcp
+        mode: host
+    command: proxy
+    volumes:
+      - /coherence-archive:/tmp/coherence-archive
+    networks:
+      - coh_net
+    deploy:
+      replicas: 2
+      placement:
+        constraints:
+          - node.role == worker
+    environment:
+      COH_OPTS: "-Dcoherence.wka=tasks.coh_wka1 -Dcoherence.wka2=tasks.coh_wka2"
+      COH_EXTEND_PORT: 8282
+      NIC: eth1
+  coh_mbean:
+    image: telus/coh_domain_poc:1.0
+    depends_on:
+      - coh_wka1
+      - coh_wka2
+    ports:
+      - "9011:9011"
+      - "3011:3011"
+    command: mbean
+    volumes:
+      - /coherence-archive:/tmp/coherence-archive
+    networks:
+      - coh_net
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+    environment:
+      JMX_OPTS: "-Dcoherence.management.remote.connectionport=3011 -Dcoherence.management.remote.registryport=9011"
+      COH_OPTS: "-Dcoherence.wka=tasks.coh_wka1 -Dcoherence.wka2=tasks.coh_wka2"
+networks:
+  coh_net:
+    external: true

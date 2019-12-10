@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<cache-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.oracle.com/coherence/coherence-cache-config"
+	xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-cache-config coherence-cache-config.xsd"
+	xmlns:element="class://com.oracle.coherence.common.namespace.preprocessing.XmlPreprocessingNamespaceHandler"
+	element:introduce-cache-config="cache-config-poc-client.xml">
+
+	<caching-schemes>
+
+		<remote-cache-scheme>
+			<scheme-name>RemoteCacheScheme</scheme-name>
+			<service-name>TcpExtendCSP</service-name>
+			<initiator-config>
+				<tcp-initiator>
+					<remote-addresses>
+						<socket-address>
+							<address system-property="extend.proxy.host">localhost</address>
+							<port system-property="extend.proxy.port">8080</port>
+						</socket-address>
+					</remote-addresses>
+				</tcp-initiator>
+				<outgoing-message-handler>
+					<heartbeat-interval>5s</heartbeat-interval>
+					<request-timeout system-property="extend.proxy.request-timeout">30s</request-timeout>
+				</outgoing-message-handler>
+				<serializer>pof</serializer>
+			</initiator-config>
+		</remote-cache-scheme>
+
+	</caching-schemes>
+
+
+</cache-config>

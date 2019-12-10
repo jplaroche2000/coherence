@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+<coherence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://xmlns.oracle.com/coherence/coherence-operational-config"
+        xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-operational-config coherence-operational-config.xsd">
+
+        <cluster-config>
+
+
+                <member-identity>
+                        <cluster-name system-property="coherence.cluster">CoherencePOC</cluster-name>
+                </member-identity>
+
+                <unicast-listener>
+
+                        <well-known-addresses>
+				 <address id="1" system-property="coherence.wka"></address>
+				 <address id="2" system-property="coherence.wka2"></address>
+                        </well-known-addresses>
+
+                        <address system-property="coherence.localhost"></address>
+                        <port system-property="coherence.localport">9000</port>
+                        <port-auto-adjust system-property="coherence.localport.adjust">true</port-auto-adjust>
+                        <priority>10</priority>
+
+                </unicast-listener>
+
+                       <shutdown-listener>
+                                <enabled system-property="coherence.shutdownhook">none</enabled>
+                        </shutdown-listener>
+
+                        <service-guardian>
+                                <service-failure-policy>logging</service-failure-policy>
+                        </service-guardian>
+<!--
+                        <authorized-hosts>
+                               <host-address id="1">127.0.0.1</host-address>
+                         </authorized-hosts>
+-->
+                        <snapshot-archivers>
+                                <directory-archiver id="archiver_1">
+                                                <archive-directory system-property="coherence.distributed.archiver.base.dir">/tmp/coherence-archive</archive-directory>
+                                        </directory-archiver>
+                        </snapshot-archivers>
+
+<!--
+                                <address-providers>
+	   						<address-provider id="persistence-hosts-list">
+	      						<address>127.0.0.1</address>
+   							</address-provider>
+						</address-providers>
+
+-->
+        </cluster-config>
+
+        <management-config>
+                <mbeans>
+                   <mbean id="100">
+                      <mbean-class>com.rogers.rci.dg.mbean.Log4JLogLevelSetter</mbean-class>
+                      <mbean-name>type=Rogers,Domain=Tools,name=Log4J</mbean-name>
+                      <enabled>true</enabled>
+                   </mbean>
+                </mbeans>
+        </management-config>
+
+</coherence>
