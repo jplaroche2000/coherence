@@ -1,0 +1,55 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: ../kompose convert
+    kompose.version: 1.16.0 (0c01309)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: gg
+  name: gg
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: gg
+    spec:
+      containers:
+      - env:
+        image: gcr.io/superb-reporter-256719/gg:latest
+        name: gg
+        ports:
+        - containerPort: 7901
+        - containerPort: 7902
+        - containerPort: 7903
+        - containerPort: 7904
+        - containerPort: 7905
+        - containerPort: 7906
+        - containerPort: 7907
+        - containerPort: 7908
+        - containerPort: 7909
+        - containerPort: 7910
+        - containerPort: 7911
+        - containerPort: 7912
+        - containerPort: 7913
+        - containerPort: 7914
+        - containerPort: 7915
+        - containerPort: 7916
+        - containerPort: 7917
+        - containerPort: 7918
+        - containerPort: 7919
+        - containerPort: 7920
+        resources: {}
+        volumeMounts:
+        - mountPath: /tmp/coherence-archive
+          name: coherence-share-claim
+      restartPolicy: Always
+      volumes:
+      - name: coherence-share-claim
+        persistentVolumeClaim:
+          claimName: coherence-share-claim
+status: {}

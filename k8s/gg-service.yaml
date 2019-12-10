@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: ../kompose convert
+    kompose.version: 1.16.0 (0c01309)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: gg
+  name: gg
+spec:
+  type: LoadBalancer
+  ports: 
+  - name: "7901"
+    port: 7901
+    targetPort: 7901
+  - name: "7902"
+    port: 7902
+    targetPort: 7902
+  - name: "7903"
+    port: 7903
+    targetPort: 7903
+  - name: "7904"
+    port: 7904
+    targetPort: 7904
+  - name: "7905"
+    port: 7905
+    targetPort: 7905
+  - name: "7906"
+    port: 7906
+    targetPort: 7906
+  - name: "7907"
+    port: 7907
+    targetPort: 7907
+  - name: "7908"
+    port: 7908
+    targetPort: 7908
+  - name: "7909"
+    port: 7909
+    targetPort: 7909
+  - name: "7910"
+    port: 7910
+    targetPort: 7910
+  - name: "7911"
+    port: 7911
+    targetPort: 7911
+  - name: "7912"
+    port: 7912
+    targetPort: 7912
+  - name: "7913"
+    port: 7913
+    targetPort: 7913
+  - name: "7914"
+    port: 7914
+    targetPort: 7914
+  - name: "7915"
+    port: 7915
+    targetPort: 7915
+  - name: "7916"
+    port: 7916
+    targetPort: 7916
+  - name: "7917"
+    port: 7917
+    targetPort: 7917
+  - name: "7918"
+    port: 7918
+    targetPort: 7918
+  - name: "7919"
+    port: 7919
+    targetPort: 7919
+  - name: "7920"
+    port: 7920
+    targetPort: 7920
+  selector:
+    io.kompose.service: gg
+status:
+  loadBalancer: {}

@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: /home/jplaroche_2017/kompose convert
+    kompose.version: 1.16.0 (0c01309)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: coh-mbean
+  name: coh-mbean
+spec:
+  clusterIP: None
+  ports:
+  - name: "9011"
+    port: 9011
+    targetPort: 9011
+  - name: "3011"
+    port: 3011
+    targetPort: 3011
+  selector:
+    io.kompose.service: coh-mbean
+status:
+  loadBalancer: {}
