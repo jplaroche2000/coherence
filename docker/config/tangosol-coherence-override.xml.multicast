@@ -63,8 +63,8 @@
         <management-config>
                 <mbeans>
                    <mbean id="100">
-                      <mbean-class>com.rogers.rci.dg.mbean.Log4JLogLevelSetter</mbean-class>
-                      <mbean-name>type=Rogers,Domain=Tools,name=Log4J</mbean-name>
+                      <mbean-class>com.telus.dg.mbean.Log4JLogLevelSetter</mbean-class>
+                      <mbean-name>type=Telus,Domain=Tools,name=Log4J</mbean-name>
                       <enabled>true</enabled>
                    </mbean>
                 </mbeans>

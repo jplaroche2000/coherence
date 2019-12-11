@@ -1,7 +1,7 @@
 #!/bin/bash
 # Run the custom ASCII Coherence dashboard.
 #
-# @author Jean-Philippe Laroche / May 25th 2017 / for Rogers servers
+# @author Jean-Philippe Laroche
 
 echo "Running test"
 
