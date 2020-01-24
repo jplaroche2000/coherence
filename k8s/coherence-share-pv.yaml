@@ -8,5 +8,5 @@ spec:
   accessModes:
   - ReadWriteMany
   nfs:
-    path: /coherence_share
-    server: 10.192.52.18
+    path: /export/coherence_share
+    server: 10.162.15.206
