@@ -1,4 +1,4 @@
-# coherence
+# Coherence
 Coherence docker and kubernetes artifacts
 
 
